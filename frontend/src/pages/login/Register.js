@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Alert from '../../components/Alert';
+import Alert from '@mui/material/Alert';
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -45,7 +45,6 @@ const Register = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-white relative">
-      <Alert message={alertMessage} type={alertType} />
       <button onClick={handleBackClick} className="absolute top-4 left-4 text-black">
         <FontAwesomeIcon icon={faArrowLeft} size="1.5x" />
       </button>
@@ -89,13 +88,16 @@ const Register = () => {
               required
             />
           </div>
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col items-center justify-between w-full">
             <button
               type="submit"
-              className="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-full w-full"
+              className="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-full w-full mb-4"
             >
               Regístrate
             </button>
+            {alertMessage &&<Alert severity={alertType} className="w-full">
+            {alertMessage}
+          </Alert>}
           </div>
         </form>
       </div>

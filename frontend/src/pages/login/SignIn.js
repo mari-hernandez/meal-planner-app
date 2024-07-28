@@ -2,17 +2,36 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useAuth } from '../../context/AuthContext';
+import Alert from '@mui/material/Alert';
 
 function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { login } = useAuth();
+  const [alertMessage, setAlertMessage] = useState('');
+  const [alertType, setAlertType] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aquí puedes manejar el envío del formulario, como hacer una petición a tu backend
-    console.log('Email:', email);
-    console.log('Password:', password);
+    try {
+      const backendUrl = process.env.REACT_APP_BACKEND_URL
+      const response = await axios.post( `${backendUrl}/login`, {
+        email,
+        password
+      });
+      if (response.status === 200) {
+        login({ token: response.data.token });
+        navigate('/home');
+      }
+    } catch (error) {
+      console.error('Error correo o contraeña incorrecta:', error);
+      setAlertMessage('Error correo o contraeña incorrecta');
+      setAlertType('error');
+      setTimeout(() => setAlertMessage(''), 3000); // Espera 3 segundos antes de ocultar el mensaje
+    }
   };
 
   const handleBackClick = () => {
@@ -56,13 +75,16 @@ function SignIn() {
             required
           />
         </div>
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col items-center justify-between w-full">
           <button
             type="submit"
-            className="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-full w-full"
+            className="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-full w-full mb-4"
           >
             Iniciar sesión
           </button>
+          {alertMessage &&<Alert severity={alertType} className="w-full">
+            {alertMessage}
+          </Alert>}
         </div>
       </form>
       </div>
