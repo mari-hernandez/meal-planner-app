@@ -4,7 +4,7 @@ import os
 load_dotenv()  # Cargar variables de entorno desde .env
 
 # Configuración de Flask
-from flask import Flask, jsonify, request
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
@@ -34,7 +34,10 @@ def create_app():
         return response
 
     # Registro de Blueprints y otras configuraciones
-    from .views import main_bp
-    app.register_blueprint(main_bp)
+    from .views.auth import auth_bp
+    from .views.recipes import recipes_bp
+
+    app.register_blueprint(auth_bp, url_prefix='/auth')
+    app.register_blueprint(recipes_bp, url_prefix='/recipe')
 
     return app

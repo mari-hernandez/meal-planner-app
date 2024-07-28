@@ -1,16 +1,13 @@
 from flask import Blueprint, jsonify, request
 from flask_bcrypt import Bcrypt
-from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
-from .models import User, db
+from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
+from ..models import User, db
 
+auth_bp = Blueprint('auth', __name__)
 bcrypt = Bcrypt()
-jwt = JWTManager()
 
-main_bp = Blueprint('main', __name__)
-
-@main_bp.route('/register', methods=['POST'])
+@auth_bp.route('/register', methods=['POST'])
 def register():
-    print('register!!')
     data = request.get_json()
     hashed_password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
     new_user = User(username=data['username'], email=data['email'], password=hashed_password)
@@ -19,7 +16,7 @@ def register():
     db.session.commit()
     return jsonify({'message': 'User registered successfully!'}), 201
 
-@main_bp.route('/login', methods=['POST'])
+@auth_bp.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
     user = User.query.filter_by(email=data['email']).first()
@@ -29,7 +26,7 @@ def login():
     else:
         return jsonify({'message': 'Invalid credentials'}), 401
 
-@main_bp.route('/home', methods=['GET'])
+@auth_bp.route('/home', methods=['GET'])
 @jwt_required()
 def get_username():
     user_id = get_jwt_identity()
