@@ -6,6 +6,7 @@ import Register from './pages/login/Register';
 import SignIn from './pages/login/SignIn';
 import NotLoggedIn from './pages/login/NotLoggedIn';
 import PrivateRoute from './components/PrivateRoute';
+import NewRecipe from './pages/app/NewRecipe';
 
 function App() {
   return (
@@ -19,6 +20,14 @@ function App() {
           element={
             <PrivateRoute>
               <Home />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/newRecipe"
+          element={
+            <PrivateRoute>
+              <NewRecipe />
             </PrivateRoute>
           }
         />

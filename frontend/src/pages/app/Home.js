@@ -13,7 +13,7 @@ const Home = () => {
     const fetchUsername = async () => {
       try {
         const backendUrl = process.env.REACT_APP_BACKEND_URL;
-        const response = await axios.get(`${backendUrl}/home`, {
+        const response = await axios.get(`${backendUrl}/auth/home`, {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },

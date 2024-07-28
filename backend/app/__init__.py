@@ -20,6 +20,8 @@ def create_app():
     app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['PREFERRED_URL_SCHEME'] = 'http'  # Needed to set STRICT_SLASHES
+    app.config['STRICT_SLASHES'] = False  # Disable redirect for now
 
     db.init_app(app)
     migrate.init_app(app, db)

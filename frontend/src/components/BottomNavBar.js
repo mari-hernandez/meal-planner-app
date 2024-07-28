@@ -10,8 +10,9 @@ const BottomNav = () => {
   const [value, setValue] = React.useState(0);
   const navigate = useNavigate();
 
-  const handleNavigation = (path) => {
+  const handleNavigation = (path, index) => {
     navigate(path);
+    setValue(index);
   };
 
   return (
@@ -24,24 +25,24 @@ const BottomNav = () => {
       style={{ position: 'fixed', bottom: 0, width: '100%', backgroundColor: 'white' }}
     >
       <BottomNavigationAction
-        //label="Calendario"
         icon={<CalendarTodayIcon />}
-        onClick={() => handleNavigation('/calendar')}
+        onClick={() => handleNavigation('/home', 0)}
+        style={{ color: value === 0 ? 'blue' : 'gray' }} // Cambia 'blue' y 'gray' a los colores deseados
       />
       <BottomNavigationAction
-        //label="Buscar"
         icon={<SearchIcon />}
-        onClick={() => handleNavigation('/search')}
+        onClick={() => handleNavigation('/search', 1)}
+        style={{ color: value === 1 ? 'blue' : 'gray' }} // Cambia 'blue' y 'gray' a los colores deseados
       />
       <BottomNavigationAction
-        //label="Agregar"
         icon={<AddCircleIcon />}
-        onClick={() => handleNavigation('/add')}
+        onClick={() => handleNavigation('/newRecipe', 2)}
+        style={{ color: value === 2 ? 'blue' : 'gray' }} // Cambia 'blue' y 'gray' a los colores deseados
       />
       <BottomNavigationAction
-        //label="Perfil"
         icon={<AccountCircleIcon />}
-        onClick={() => handleNavigation('/profile')}
+        onClick={() => handleNavigation('/profile', 3)}
+        style={{ color: value === 3 ? 'blue' : 'gray' }} // Cambia 'blue' y 'gray' a los colores deseados
       />
     </BottomNavigation>
   );

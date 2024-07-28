@@ -29,7 +29,7 @@ def get_recipes():
 
 
 # Endpoint para crear una nueva receta
-@recipes_bp.route('/', methods=['POST'])
+@recipes_bp.route('/new', methods=['POST'])
 @jwt_required()
 def create_recipe():
     data = request.get_json()

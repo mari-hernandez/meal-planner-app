@@ -19,7 +19,7 @@ function SignIn() {
     e.preventDefault();
     try {
       const backendUrl = process.env.REACT_APP_BACKEND_URL
-      const response = await axios.post( `${backendUrl}/login`, {
+      const response = await axios.post( `${backendUrl}/auth/login`, {
         email,
         password
       });
