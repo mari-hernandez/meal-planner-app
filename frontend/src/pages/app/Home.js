@@ -1,7 +1,9 @@
-// src/pages/Home.js
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import axios from 'axios';
+import BottomNavBar from '../../components/BottomNavBar';
+import CustomHeading from '../../components/CustomText';
+import CustomPrincipalDiv from '../../components/CustomDiv';
 
 const Home = () => {
   const { user } = useAuth();
@@ -28,8 +30,11 @@ const Home = () => {
   }, [user]);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-start bg-white">
-      <h1 className="mt-8 text-3xl font-bold text-black">Hola {username}!</h1>
+    <div>
+    <CustomPrincipalDiv>
+      <CustomHeading>Hola {username}! </CustomHeading>
+    </CustomPrincipalDiv>
+    <BottomNavBar />
     </div>
   );
 };

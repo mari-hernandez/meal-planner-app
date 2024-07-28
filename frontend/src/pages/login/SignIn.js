@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
 import Alert from '@mui/material/Alert';
+import CustomButton, { BackButton } from '../../components/CustomButton';
+import CustomHeading from '../../components/CustomText';
+import CustomPrincipalDiv from '../../components/CustomDiv';
 
 function SignIn() {
   const [email, setEmail] = useState('');
@@ -34,18 +35,12 @@ function SignIn() {
     }
   };
 
-  const handleBackClick = () => {
-    navigate('/');
-  };
-
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-white">
-      <button onClick={handleBackClick} className="absolute top-4 left-4 text-black">
-        <FontAwesomeIcon icon={faArrowLeft} size="1.5x" />
-      </button>
+    <CustomPrincipalDiv>
+      <BackButton toUrl="/" /> 
       
       <div className="w-full px-6">
-      <h1 className="text-3xl font-bold mb-8 text-black">Iniciar sesión</h1>
+      <CustomHeading>Iniciar sesión </CustomHeading>
       <form onSubmit={handleSubmit} className="w-full max-w-sm">
         
         <div className="mb-4">
@@ -76,19 +71,18 @@ function SignIn() {
           />
         </div>
         <div className="flex flex-col items-center justify-between w-full">
-          <button
-            type="submit"
-            className="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-full w-full mb-4"
-          >
+          <CustomButton type="submit" color="primary">
             Iniciar sesión
-          </button>
-          {alertMessage &&<Alert severity={alertType} className="w-full">
-            {alertMessage}
-          </Alert>}
+          </CustomButton>
+          {alertMessage && (
+            <Alert severity={alertType} className="w-full">
+              {alertMessage}
+            </Alert>
+          )}
         </div>
       </form>
       </div>
-    </div>
+    </CustomPrincipalDiv>
   );
 }
 
