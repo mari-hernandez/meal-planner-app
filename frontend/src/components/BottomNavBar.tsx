@@ -6,47 +6,80 @@ import SearchIcon from "@mui/icons-material/Search";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-export const BottomNavBar: React.FC = () => {
-  const navigate = useNavigate();
-  const [value, setValue] = useState(0);
+export enum NavBarRoutes {
+  HOME = "/home",
+  SEARCH = "/search",
+  NEW_RECIPE = "/newRecipe",
+  PROFILE = "/profile",
+}
 
-  const handleNavigation = (path: string, index: number) => {
-    navigate(path);
-    setValue(index);
+interface BottomNavBarButtonProps {
+  icon: JSX.Element;
+  isActive: boolean;
+  onClick: () => void;
+}
+
+const BottomNavBarButton: React.FC<BottomNavBarButtonProps> = ({
+  icon,
+  isActive,
+  onClick,
+}) => {
+  return (
+    <BottomNavigationAction
+      icon={icon}
+      onClick={onClick}
+      {...(isActive && { sx: { color: "primary.main" } })}
+    />
+  );
+};
+
+interface BottomNavBarProps {
+  activeRoute?: NavBarRoutes;
+}
+
+export const BottomNavBar: React.FC<BottomNavBarProps> = ({ activeRoute }) => {
+  const navigate = useNavigate();
+  const [currentActiveRoute, setCurrentActiveRoute] = useState(
+    activeRoute ?? NavBarRoutes.HOME
+  );
+
+  const handleNavigation = (route: NavBarRoutes) => {
+    navigate(route);
+    setCurrentActiveRoute(route);
   };
+
   return (
     <BottomNavigation
-      value={value}
-      onChange={(event, newValue) => {
-        setValue(newValue);
+      value={currentActiveRoute}
+      onChange={(event, newRoute) => {
+        setCurrentActiveRoute(newRoute);
       }}
       showLabels
       style={{
         position: "fixed",
         bottom: 0,
         width: "100%",
-        backgroundColor: "white",
       }}
     >
-      <BottomNavigationAction
+      <BottomNavBarButton
         icon={<CalendarTodayIcon />}
-        onClick={() => handleNavigation("/home", 0)}
-        style={{ color: value === 0 ? "blue" : "gray" }} // Cambia 'blue' y 'gray' a los colores deseados
+        isActive={currentActiveRoute === NavBarRoutes.HOME}
+        onClick={() => handleNavigation(NavBarRoutes.HOME)}
       />
-      <BottomNavigationAction
+      <BottomNavBarButton
         icon={<SearchIcon />}
-        onClick={() => handleNavigation("/search", 1)}
-        style={{ color: value === 1 ? "blue" : "gray" }} // Cambia 'blue' y 'gray' a los colores deseados
+        isActive={currentActiveRoute === NavBarRoutes.SEARCH}
+        onClick={() => handleNavigation(NavBarRoutes.SEARCH)}
       />
-      <BottomNavigationAction
+      <BottomNavBarButton
         icon={<AddCircleIcon />}
-        onClick={() => handleNavigation("/newRecipe", 2)}
-        style={{ color: value === 2 ? "blue" : "gray" }} // Cambia 'blue' y 'gray' a los colores deseados
+        isActive={currentActiveRoute === NavBarRoutes.NEW_RECIPE}
+        onClick={() => handleNavigation(NavBarRoutes.NEW_RECIPE)}
       />
-      <BottomNavigationAction
+      <BottomNavBarButton
         icon={<AccountCircleIcon />}
-        onClick={() => handleNavigation("/profile", 3)}
-        style={{ color: value === 3 ? "blue" : "gray" }} // Cambia 'blue' y 'gray' a los colores deseados
+        isActive={currentActiveRoute === NavBarRoutes.PROFILE}
+        onClick={() => handleNavigation(NavBarRoutes.PROFILE)}
       />
     </BottomNavigation>
   );

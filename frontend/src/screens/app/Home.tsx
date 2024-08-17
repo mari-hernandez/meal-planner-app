@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
 import { useAuth } from "../../contexts";
-import { BottomNavBar } from "../../components";
+import { BottomNavBar, NavBarRoutes } from "../../components";
 import { CenteredColumnContainer } from "../../styles";
 import axios from "axios";
 
@@ -35,7 +35,7 @@ export const Home: React.FC = () => {
       <CenteredColumnContainer>
         <Typography variant="h3">Hola {username}! </Typography>
       </CenteredColumnContainer>
-      <BottomNavBar />
+      <BottomNavBar activeRoute={NavBarRoutes.HOME} />
     </>
   );
 };

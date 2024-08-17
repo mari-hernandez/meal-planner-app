@@ -11,9 +11,8 @@ import {
   Typography,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { BottomNavBar, InputField } from "../../components";
+import { BottomNavBar, InputField, NavBarRoutes } from "../../components";
 import {
-  Body,
   CenteredColumnContainer,
   FormContainer,
   PrimaryButton,
@@ -201,7 +200,7 @@ export const NewRecipe: React.FC = () => {
   );
 
   return (
-    <Body>
+    <>
       <CenteredColumnContainer>
         <Typography variant="h3">Nueva Receta</Typography>
         <FormContainer onSubmit={handleSubmit(handleNewRecipe)}>
@@ -337,7 +336,7 @@ export const NewRecipe: React.FC = () => {
           <WhiteSpace />
         </FormContainer>
       </CenteredColumnContainer>
-      <BottomNavBar />
-    </Body>
+      <BottomNavBar activeRoute={NavBarRoutes.NEW_RECIPE} />
+    </>
   );
 };
