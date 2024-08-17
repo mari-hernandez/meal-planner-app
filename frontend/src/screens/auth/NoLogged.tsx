@@ -1,10 +1,15 @@
-import { Typography } from "@mui/material";
-import { CenteredColumnContainer } from "../../styles";
+import { SectionHeader } from "../../components";
+import { CenteredColumnContainer, VerticalCenteredBody } from "../../styles";
 
 export const NoLogged: React.FC = () => {
   return (
-    <CenteredColumnContainer>
-      <Typography variant="h3">Lo siento, no estás logueado :(</Typography>
-    </CenteredColumnContainer>
+    <VerticalCenteredBody>
+      <CenteredColumnContainer>
+        <SectionHeader
+          title="Lo siento, no estás logueado :("
+          showBackButton={false}
+        />
+      </CenteredColumnContainer>
+    </VerticalCenteredBody>
   );
 };

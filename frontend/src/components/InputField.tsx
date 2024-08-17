@@ -12,6 +12,7 @@ import { FieldErrors, UseFormRegister } from "react-hook-form";
 
 const Container = styled(Box)({
   position: "relative",
+  width: "100%",
 });
 
 const StyledInputLabel = styled(InputLabel)({

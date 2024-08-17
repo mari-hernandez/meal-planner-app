@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
 import { useAuth } from "../../contexts";
 import { BottomNavBar, NavBarRoutes } from "../../components";
-import { CenteredColumnContainer } from "../../styles";
+import { CenteredColumnContainer, VerticalCenteredBody } from "../../styles";
 import axios from "axios";
 
 export const Home: React.FC = () => {
@@ -31,11 +31,11 @@ export const Home: React.FC = () => {
     }
   }, [user]);
   return (
-    <>
+    <VerticalCenteredBody>
       <CenteredColumnContainer>
         <Typography variant="h3">Hola {username}! </Typography>
       </CenteredColumnContainer>
       <BottomNavBar activeRoute={NavBarRoutes.HOME} />
-    </>
+    </VerticalCenteredBody>
   );
 };
