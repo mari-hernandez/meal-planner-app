@@ -24,9 +24,13 @@ export const FormContainer = styled("form")({
 });
 
 // Buttons
-export const PrimaryButton = styled(Button)({});
+export const PrimaryButton = styled(Button)({
+  textTransform: "none",
+});
 
-export const SecondaryButton = styled(Button)({});
+export const SecondaryButton = styled(Button)({
+  textTransform: "none",
+});
 
 // Texts
 export const HelperText = styled("p")({
