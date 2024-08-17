@@ -1,13 +1,13 @@
 export const theme = {
   palette: {
     text: {
-      primary: "#7355FB",
-      secondary: "#F1EEFF",
+      primary: "#8F2E41",
+      secondary: "#C7A56F",
       black: "#414046",
     },
     background: {
-      primary: "#7355FB",
-      secondary: "#F1EEFF",
+      primary: "#8F2E41",
+      secondary: "#C7A56F",
       white: "#FFFFFF",
     },
     success: {
