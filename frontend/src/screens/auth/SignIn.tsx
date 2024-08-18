@@ -1,15 +1,15 @@
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { Alert, Typography } from "@mui/material";
+import { Alert } from "@mui/material";
 import { AlertProps, UserSignUpData } from "../../interfaces";
-import { InputField, NavigateBackButton } from "../../components";
+import { InputField, SectionHeader } from "../../components";
 import { useAuth } from "../../contexts";
 import {
-  Body,
   CenteredColumnContainer,
   FormContainer,
   PrimaryButton,
+  VerticalCenteredBody,
 } from "../../styles";
 import axios from "axios";
 
@@ -57,18 +57,16 @@ export const SignIn: React.FC = () => {
     [login, navigate]
   );
   return (
-    <Body>
-      <NavigateBackButton onClick={() => navigate("/")} />
+    <VerticalCenteredBody>
+      <SectionHeader title="Iniciar sesión" />
       <CenteredColumnContainer>
         <FormContainer onSubmit={handleSubmit(handleSignIn)}>
-          <Typography variant="h3">Iniciar sesión</Typography>
-
           <InputField
             label="Correo"
             parameterName="email"
             register={register}
             errors={errors}
-            errorText="Correo es requerido"
+            errorText="Debes ingresar un correo"
             type="email"
           />
 
@@ -77,7 +75,7 @@ export const SignIn: React.FC = () => {
             parameterName="password"
             register={register}
             errors={errors}
-            errorText="Contraseña es requerida"
+            errorText="Debes ingresar una contraseña"
             type="password"
           />
 
@@ -85,6 +83,6 @@ export const SignIn: React.FC = () => {
         </FormContainer>
         {alert && <Alert severity={alert.severity}>{alert.message}</Alert>}
       </CenteredColumnContainer>
-    </Body>
+    </VerticalCenteredBody>
   );
 };

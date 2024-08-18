@@ -22,6 +22,13 @@ import {
 import { useAuth } from "../../contexts";
 import axios from "axios";
 
+const Container = styled(Box)({
+  display: "flex",
+  flexDirection: "column",
+  width: "100%",
+  gap: "8px",
+});
+
 const Row = styled(Box)({
   display: "flex",
   alignItems: "center",
@@ -230,21 +237,23 @@ export const NewRecipe: React.FC = () => {
             type="number"
           />
 
-          <InputLabel id="category-label">Categoría</InputLabel>
-          <Select
-            labelId="category-label"
-            name="category_id"
-            value={category_id}
-            onChange={handleInputChange}
-            fullWidth
-            required
-          >
-            {categories.map((category) => (
-              <MenuItem key={category.id} value={category.id}>
-                {category.name}
-              </MenuItem>
-            ))}
-          </Select>
+          <Container>
+            <InputLabel id="category-label">Categoría</InputLabel>
+            <Select
+              labelId="category-label"
+              name="category_id"
+              value={category_id}
+              onChange={handleInputChange}
+              fullWidth
+              required
+            >
+              {categories.map((category) => (
+                <MenuItem key={category.id} value={category.id}>
+                  {category.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </Container>
 
           <InputField
             label="Instrucciones"
@@ -272,66 +281,74 @@ export const NewRecipe: React.FC = () => {
             errorText="URL de la imagen es requerida"
           />
 
-          <InputLabel id="difficulty-label">Nivel de Dificultad</InputLabel>
-          <Select
-            labelId="difficulty-label"
-            name="difficulty_level"
-            value={difficulty_level}
-            onChange={handleInputChange}
-            fullWidth
-            required
-          >
-            <MenuItem value="Easy">Fácil</MenuItem>
-            <MenuItem value="Medium">Medio</MenuItem>
-            <MenuItem value="Hard">Difícil</MenuItem>
-          </Select>
+          <Container>
+            <InputLabel id="difficulty-label">Nivel de Dificultad</InputLabel>
+            <Select
+              labelId="difficulty-label"
+              name="difficulty_level"
+              value={difficulty_level}
+              onChange={handleInputChange}
+              fullWidth
+              required
+            >
+              <MenuItem value="Easy">Fácil</MenuItem>
+              <MenuItem value="Medium">Medio</MenuItem>
+              <MenuItem value="Hard">Difícil</MenuItem>
+            </Select>
+          </Container>
 
-          <Typography variant="h6">Ingredientes</Typography>
-          {IngredientsData.map((ingredient, index) => (
-            <Row key={index}>
-              <Select
-                name="ingredient_id"
-                value={ingredient.ingredient_id}
-                onChange={(e) => handleIngredientChange(index, e)}
-                fullWidth
-                required
-              >
-                {ingredients.map((ing) => (
-                  <MenuItem key={ing.id} value={ing.id}>
-                    {ing.name}
-                  </MenuItem>
-                ))}
-              </Select>
-              <TextField
-                name="quantity"
-                value={ingredient.quantity}
-                onChange={(e) => handleIngredientChange(index, e)}
-                type="number"
-                label="Cantidad"
-                fullWidth
-                required
-              />
-              <TextField
-                name="unit"
-                value={ingredient.unit}
-                onChange={(e) => handleIngredientChange(index, e)}
-                label="Unidad"
-                fullWidth
-                required
-              />
-              <IconButton
-                color="error"
-                onClick={() => handleRemoveIngredient(index)}
-              >
-                <DeleteIcon />
-              </IconButton>
-            </Row>
-          ))}
-
-          <SecondaryButton onClick={handleAddIngredient}>
-            Agregar Ingrediente
-          </SecondaryButton>
-          <PrimaryButton type="submit">Crear Receta</PrimaryButton>
+          <Container>
+            <Typography variant="h6">Ingredientes</Typography>
+            {IngredientsData.length === 0 && (
+              <Typography variant="body1">
+                Aún no has agregado ingredientes
+              </Typography>
+            )}
+            {IngredientsData.map((ingredient, index) => (
+              <Row key={index}>
+                <Select
+                  name="ingredient_id"
+                  value={ingredient.ingredient_id}
+                  onChange={(e) => handleIngredientChange(index, e)}
+                  fullWidth
+                  required
+                >
+                  {ingredients.map((ing) => (
+                    <MenuItem key={ing.id} value={ing.id}>
+                      {ing.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+                <TextField
+                  name="quantity"
+                  value={ingredient.quantity}
+                  onChange={(e) => handleIngredientChange(index, e)}
+                  type="number"
+                  label="Cantidad"
+                  fullWidth
+                  required
+                />
+                <TextField
+                  name="unit"
+                  value={ingredient.unit}
+                  onChange={(e) => handleIngredientChange(index, e)}
+                  label="Unidad"
+                  fullWidth
+                  required
+                />
+                <IconButton
+                  color="error"
+                  onClick={() => handleRemoveIngredient(index)}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </Row>
+            ))}
+            <SecondaryButton onClick={handleAddIngredient}>
+              Agregar Ingrediente
+            </SecondaryButton>
+            <PrimaryButton type="submit">Crear Receta</PrimaryButton>
+          </Container>
 
           <WhiteSpace />
         </FormContainer>

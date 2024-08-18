@@ -1,14 +1,14 @@
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { Alert, Typography } from "@mui/material";
+import { Alert } from "@mui/material";
 import { AlertProps, UserSignUpData } from "../../interfaces";
-import { InputField, NavigateBackButton } from "../../components";
+import { InputField, SectionHeader } from "../../components";
 import {
-  Body,
   CenteredColumnContainer,
   FormContainer,
   PrimaryButton,
+  VerticalCenteredBody,
 } from "../../styles";
 import axios from "axios";
 
@@ -62,18 +62,16 @@ export const SignUp: React.FC = () => {
     [navigate]
   );
   return (
-    <Body>
-      <NavigateBackButton onClick={() => navigate("/")} />
+    <VerticalCenteredBody>
+      <SectionHeader title="Regístrate en Meal Planner" />
       <CenteredColumnContainer>
         <FormContainer onSubmit={handleSubmit(handleSignUp)}>
-          <Typography variant="h3">Regístrate en Meal Planner</Typography>
-
           <InputField
             label="Correo"
             parameterName="email"
             register={register}
             errors={errors}
-            errorText="Correo es requerido"
+            errorText="Debes ingresar un correo"
             type="email"
           />
 
@@ -82,7 +80,7 @@ export const SignUp: React.FC = () => {
             parameterName="username"
             register={register}
             errors={errors}
-            errorText="Nombre de usuario es requerido"
+            errorText="Debes ingresar un nombre de usuario"
           />
 
           <InputField
@@ -90,7 +88,7 @@ export const SignUp: React.FC = () => {
             parameterName="password"
             register={register}
             errors={errors}
-            errorText="Contraseña es requerida"
+            errorText="Debes ingresar una contraseña"
             type="password"
           />
 
@@ -99,6 +97,6 @@ export const SignUp: React.FC = () => {
 
         {alert && <Alert severity={alert.severity}>{alert.message}</Alert>}
       </CenteredColumnContainer>
-    </Body>
+    </VerticalCenteredBody>
   );
 };
