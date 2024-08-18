@@ -1,9 +1,8 @@
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { Landing, SignIn, SignUp } from "./screens/auth";
-import { Home } from "./screens/app";
+import { Home, NewRecipe, Profile } from "./screens/app";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { theme } from "./config/theme";
-import { NewRecipe } from "./screens/app/NewRecipe";
 
 const muiTheme = createTheme({
   palette: { primary: { main: theme.palette.text.primary } },
@@ -41,6 +40,7 @@ const AppRouter = () => {
         <Route path="" element={<PrivateRoute />}>
           <Route path="/home" element={<Home />} />
           <Route path="/newRecipe" element={<NewRecipe />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>
     </BrowserRouter>
