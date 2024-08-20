@@ -1,8 +1,0 @@
-Flask
-flask-bcrypt
-flask-jwt-extended
-Flask-Migrate
-SQLAlchemy
-Marshmallow
-python-dotenv
-psycopg2

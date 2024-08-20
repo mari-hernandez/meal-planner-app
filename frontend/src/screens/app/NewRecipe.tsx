@@ -41,7 +41,7 @@ interface Category {
 }
 
 interface IngredientData {
-  ingredient_id: string;
+  ingredientId: string;
   quantity: string;
   unit: string;
 }
@@ -53,13 +53,13 @@ interface Ingredient {
 
 interface NewRecipeData {
   name: string;
-  preparation_time: string;
+  preparationTime: string;
   portions: string;
-  category_id: string;
+  categoryId: string;
   instructions: string;
   description: string;
-  image_url: string;
-  difficulty_level: string;
+  imageUrl: string;
+  difficultyLevel: string;
   ingredients: IngredientData[];
 }
 
@@ -82,19 +82,19 @@ export const NewRecipe: React.FC = () => {
   } = useForm<NewRecipeData>({
     defaultValues: {
       name: "",
-      preparation_time: "",
+      preparationTime: "",
       portions: "",
-      category_id: "",
+      categoryId: "",
       instructions: "",
       description: "",
-      image_url: "",
-      difficulty_level: "",
+      imageUrl: "",
+      difficultyLevel: "",
       ingredients: [],
     },
   });
 
-  const category_id = watch("category_id");
-  const difficulty_level = watch("difficulty_level");
+  const categoryId = watch("categoryId");
+  const difficultyLevel = watch("difficultyLevel");
   const IngredientsData = watch("ingredients");
 
   useEffect(() => {
@@ -155,7 +155,7 @@ export const NewRecipe: React.FC = () => {
   const handleAddIngredient = () => {
     setValue("ingredients", [
       ...IngredientsData,
-      { ingredient_id: "", quantity: "", unit: "" },
+      { ingredientId: "", quantity: "", unit: "" },
     ]);
   };
 
@@ -175,13 +175,13 @@ export const NewRecipe: React.FC = () => {
         }
         const newRecipePayload = {
           name: data.name,
-          preparation_time: data.preparation_time,
+          preparationTime: data.preparationTime,
           portions: data.portions,
-          category_id: data.category_id,
+          categoryId: data.categoryId,
           instructions: data.instructions,
           description: data.description,
-          image_url: data.image_url,
-          difficulty_level: data.difficulty_level,
+          imageUrl: data.imageUrl,
+          difficultyLevel: data.difficultyLevel,
           ingredients: data.ingredients,
         };
         console.log({ newRecipePayload });
@@ -221,7 +221,7 @@ export const NewRecipe: React.FC = () => {
 
           <InputField
             label="Tiempo de preparación (minutos)"
-            parameterName="preparation_time"
+            parameterName="preparationTime"
             register={register}
             errors={errors}
             errorText="Tiempo de preparación es requerido"
@@ -241,8 +241,8 @@ export const NewRecipe: React.FC = () => {
             <InputLabel id="category-label">Categoría</InputLabel>
             <Select
               labelId="category-label"
-              name="category_id"
-              value={category_id}
+              name="categoryId"
+              value={categoryId}
               onChange={handleInputChange}
               fullWidth
               required
@@ -275,7 +275,7 @@ export const NewRecipe: React.FC = () => {
 
           <InputField
             label="URL de la imagen"
-            parameterName="image_url"
+            parameterName="imageUrl"
             register={register}
             errors={errors}
             errorText="URL de la imagen es requerida"
@@ -285,8 +285,8 @@ export const NewRecipe: React.FC = () => {
             <InputLabel id="difficulty-label">Nivel de Dificultad</InputLabel>
             <Select
               labelId="difficulty-label"
-              name="difficulty_level"
-              value={difficulty_level}
+              name="difficultyLevel"
+              value={difficultyLevel}
               onChange={handleInputChange}
               fullWidth
               required
@@ -307,8 +307,8 @@ export const NewRecipe: React.FC = () => {
             {IngredientsData.map((ingredient, index) => (
               <Row key={index}>
                 <Select
-                  name="ingredient_id"
-                  value={ingredient.ingredient_id}
+                  name="ingredientId"
+                  value={ingredient.ingredientId}
                   onChange={(e) => handleIngredientChange(index, e)}
                   fullWidth
                   required
