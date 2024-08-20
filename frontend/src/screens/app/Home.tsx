@@ -16,7 +16,7 @@ export const Home: React.FC = () => {
         if (!user) {
           throw new Error("User is not logged in");
         }
-        const response = await axios.get(`${backendUrl}/auth/home`, {
+        const response = await axios.get(`${backendUrl}/home`, {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },

@@ -31,7 +31,7 @@ export const SignIn: React.FC = () => {
         const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
         const signInPayload = {
-          email: data.email,
+          username: data.username,
           password: data.password,
         };
         console.log({ signInPayload });
@@ -62,12 +62,12 @@ export const SignIn: React.FC = () => {
       <CenteredColumnContainer>
         <FormContainer onSubmit={handleSubmit(handleSignIn)}>
           <InputField
-            label="Correo"
-            parameterName="email"
+            label="Nombre de usuario"
+            parameterName="username"
             register={register}
             errors={errors}
-            errorText="Debes ingresar un correo"
-            type="email"
+            errorText="Debes ingresar un nombre de usuario"
+            type="username"
           />
 
           <InputField
